@@ -1,127 +1,128 @@
-# 🚗 Police Argos - Detecção de Placas Brasileiras
+# 🚗 Police Argos - Brazilian License Plate Detection
 
-Sistema de detecção e reconhecimento automático de placas de veículos brasileiros usando YOLOv11 + EasyOCR.
+Automatic detection and recognition system for Brazilian vehicle license plates using YOLOv11 + EasyOCR.
 
-## 📋 Funcionalidades
+## 📋 Features
 
-- ✅ Detecção de placas em **imagens** estáticas
-- ✅ OCR local para leitura de placas (sem dependência de APIs)
-- ✅ Suporte para placas antigas (ABC1234) e Mercosul (ABC1D23)
-- ✅ Processamento otimizado para vídeos
+- ✅ License plate detection in **static images**
+- ✅ License plate detection in **videos**
+- ✅ Local OCR for plate reading (no API dependencies)
+- ✅ Support for old (ABC1234) and Mercosul (ABC1D23) plates
+- ✅ Optimized video processing
 
-## 🛠️ Tecnologias
+## 🛠️ Technologies
 
-- **YOLOv11** - Detecção de objetos
-- **EasyOCR** - Reconhecimento óptico de caracteres
-- **OpenCV** - Processamento de imagem/vídeo
+- **YOLOv11** - Object detection
+- **EasyOCR** - Optical character recognition
+- **OpenCV** - Image/video processing
 - **Python 3.11+**
 
-## 📦 Instalação
+## 📦 Installation
 
-### 1. Clone o repositório
+### 1. Clone the repository
 ```bash
-git clone https://github.com/seu-usuario/police-argos2.git
+git clone https://github.com/FelipeSales18/police-argos2.git
 cd police-argos2
 ```
 
-### 2. Instale as dependências
+### 2. Install dependencies
 ```bash
 cd backend
 pip install -r requirements.txt
 ```
 
-### 3. Baixe o modelo YOLOv11 treinado
+### 3. Download the trained YOLOv11 model
 
-**⚠️ IMPORTANTE**: Você precisa baixar o modelo treinado para detecção de placas brasileiras:
+**⚠️ IMPORTANT**: You need to download the trained model for Brazilian license plate detection:
 
 🔗 **Download**: [placa-br-yolov11.pt](https://huggingface.co/felipedutrain/placa-br-yolov11)
 
-Após o download, coloque o arquivo `placa-br-yolov11.pt` na pasta `backend/`.
+After downloading, place the `placa-br-yolov11.pt` file in the `backend/` folder.
 
-## 🚀 Como usar
+## 🚀 How to Use
 
-### Para processar imagens:
+### To process images:
 
-1. Coloque sua imagem na pasta `backend/`
-2. Edite o arquivo `detector.py` e defina:
+1. Place your image in the `backend/` folder
+2. Edit the `detector.py` file and set:
 ```python
-INPUT_PATH = "sua_imagem.jpg"
+INPUT_PATH = "your_image.jpg"
 ```
-3. Execute:
+3. Run:
 ```bash
 python detector.py
 ```
 
-### Para processar vídeos:
+### To process videos:
 
-1. Coloque seu vídeo na pasta `backend/`
-2. Edite o arquivo `detector.py` e defina:
+1. Place your video in the `backend/` folder
+2. Edit the `detector.py` file and set:
 ```python
-INPUT_PATH = "seu_video.mp4"
+INPUT_PATH = "your_video.mp4"
 ```
-3. Execute:
+3. Run:
 ```bash
 python detector.py
 ```
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 police-argos2/
 ├── backend/
-│   ├── detector.py              # Script principal
-│   ├── requirements.txt         # Dependências Python
-│   ├── placa-br-yolov11.pt     # Modelo YOLO (baixar do Hugging Face)
-│   └── [imagens/vídeos de teste]
-├── LICENSE                      # Licença MIT
-└── README.md                    # Este arquivo
+│   ├── detector.py              # Main script
+│   ├── requirements.txt         # Python dependencies
+│   ├── placa-br-yolov11.pt     # YOLO model (download from Hugging Face)
+│   └── [test images/videos]
+├── LICENSE                      # MIT License
+└── README.md                    # This file
 ```
 
-## ⚙️ Configurações
+## ⚙️ Configuration
 
-No arquivo [`detector.py`](backend/detector.py):
+In the [`detector.py`](backend/detector.py) file:
 
-- `MODEL_PATH` - Caminho do modelo YOLO
-- `INPUT_PATH` - Arquivo de entrada (imagem ou vídeo)
-- `SKIP_FRAMES` - Processar 1 frame a cada N (para otimizar vídeos)
+- `MODEL_PATH` - Path to the YOLO model
+- `INPUT_PATH` - Input file (image or video)
+- `SKIP_FRAMES` - Process 1 frame every N frames (to optimize videos)
 
-## 📊 Resultados
+## 📊 Results
 
-- **Imagens**: Salvas como `resultado_final.jpg`
-- **Vídeos**: Salvos como `resultado_video.mp4`
-- **Recortes**: Salvos como `placa_0.jpg`, `placa_1.jpg`, etc.
+- **Images**: Saved as `resultado_final.jpg`
+- **Videos**: Saved as `resultado_video.mp4`
+- **Crops**: Saved as `placa_0.jpg`, `placa_1.jpg`, etc.
 
-## 🔧 Requisitos do Sistema
+## 🔧 System Requirements
 
 - Python 3.11+
 - 4GB+ RAM
-- GPU (opcional, mas recomendado para vídeos)
-- Windows, Linux ou MacOS
+- GPU (optional, but recommended for videos)
+- Windows, Linux or MacOS
 
-## 🤝 Contribuindo
+## 🤝 Contributing
 
-Contribuições são bem-vindas! Sinta-se à vontade para:
+Contributions are welcome! Feel free to:
 
-1. Fazer um Fork do projeto
-2. Criar uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abrir um Pull Request
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/MyFeature`)
+3. Commit your changes (`git commit -m 'Add MyFeature'`)
+4. Push to the branch (`git push origin feature/MyFeature`)
+5. Open a Pull Request
 
-## 📝 Licença
+## 📝 License
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Agradecimentos
+## 🙏 Acknowledgments
 
-- Modelo YOLOv11 treinado disponível em [Hugging Face](https://huggingface.co/felipedutrain/placa-br-yolov11)
-- EasyOCR pela biblioteca de OCR
-- Ultralytics pelo framework YOLO
+- YOLOv11 trained model available on [Hugging Face](https://huggingface.co/felipedutrain/placa-br-yolov11)
+- EasyOCR for the OCR library
+- Ultralytics for the YOLO framework
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
-**Felipe** - [GitHub](https://github.com/seu-usuario)
+**Felipe** - [GitHub](https://github.com/FelipeSales18)
 
 ---
 
-⭐ Se este projeto foi útil para você, considere dar uma estrela!
+⭐ If this project was useful to you, consider giving it a star!

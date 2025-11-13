@@ -21,6 +21,11 @@ dist/
 *.mkv
 *.flv
 !carro_teste.jpg
+!carro-frente.jpg
+!carro-romario.jpg
+!placa-doiscarros.jpg
+!ego_Carro.jpg
+!foto_placa.jpg
 
 # Modelos YOLO
 *.pt
