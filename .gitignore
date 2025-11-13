@@ -26,6 +26,10 @@ dist/
 !placa-doiscarros.jpg
 !ego_Carro.jpg
 !foto_placa.jpg
+!carro_testeEGO.jpg
+!carro_testeRJ.jpg
+!carro_testeROMARIO.jpg
+
 
 # Modelos YOLO
 *.pt
