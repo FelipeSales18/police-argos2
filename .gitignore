@@ -11,25 +11,34 @@ build/
 dist/
 *.egg-info/
 
-# Imagens e vídeos de teste
+# Imagens e vídeos de teste - TODOS OS FORMATOS
 *.jpg
 *.jpeg
 *.png
+*.gif
+*.bmp
+*.tiff
+*.tif
+*.webp
+*.svg
+*.ico
 *.mp4
 *.avi
 *.mov
 *.mkv
 *.flv
-!carro_teste.jpg
-!carro-frente.jpg
-!carro-romario.jpg
-!placa-doiscarros.jpg
-!ego_Carro.jpg
-!foto_placa.jpg
-!carro_testeEGO.jpg
-!carro_testeRJ.jpg
-!carro_testeROMARIO.jpg
+*.wmv
+*.webm
+*.m4v
+*.mpg
+*.mpeg
 
+# Arquivos de resultado/debug
+resultado_*.jpg
+resultado_*.mp4
+placa_*.jpg
+debug_*.jpg
+heatmap_*.jpg
 
 # Modelos YOLO
 *.pt
