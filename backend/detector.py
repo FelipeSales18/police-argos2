@@ -165,11 +165,29 @@ def ocr_placa(image, debug_index=0):
             new_width = int(width * scale)
             gray = cv2.resize(gray, (new_width, 150), interpolation=cv2.INTER_CUBIC)
         
+        # ==============================
+        # TÉCNICAS ADICIONADAS: BILATERAL + OTSU
+        # ==============================
+        
+        # 1. Bilateral Filter - Remove ruído preservando bordas
+        bilateral = cv2.bilateralFilter(gray, 11, 17, 17)
+        
+        # 2. Threshold de Otsu - Binarização automática
+        _, otsu = cv2.threshold(bilateral, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        
+        # 3. Otsu invertido (para placas com fundo escuro)
+        _, otsu_inv = cv2.threshold(bilateral, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+        
+        # ==============================
+        # TÉCNICAS ORIGINAIS (mantidas)
+        # ==============================
+        
         # Aumenta contraste
-        gray = cv2.equalizeHist(gray)
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+        enhanced = clahe.apply(gray)
         
         # Aplica threshold adaptativo
-        thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+        thresh = cv2.adaptiveThreshold(enhanced, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
                                        cv2.THRESH_BINARY, 11, 2)
         
         # Remove ruído com morfologia
@@ -184,14 +202,22 @@ def ocr_placa(image, debug_index=0):
         # Salva versões processadas se DEBUG_MODE
         if DEBUG_MODE:
             cv2.imwrite(f"debug_ocr_{debug_index}_1_gray.jpg", gray)
-            cv2.imwrite(f"debug_ocr_{debug_index}_2_thresh.jpg", thresh)
-            cv2.imwrite(f"debug_ocr_{debug_index}_3_morph.jpg", morph)
-            cv2.imwrite(f"debug_ocr_{debug_index}_4_thresh_inv.jpg", thresh_inv)
-            cv2.imwrite(f"debug_ocr_{debug_index}_5_morph_inv.jpg", morph_inv)
+            cv2.imwrite(f"debug_ocr_{debug_index}_2_bilateral.jpg", bilateral)
+            cv2.imwrite(f"debug_ocr_{debug_index}_3_otsu.jpg", otsu)
+            cv2.imwrite(f"debug_ocr_{debug_index}_4_otsu_inv.jpg", otsu_inv)
+            cv2.imwrite(f"debug_ocr_{debug_index}_5_enhanced.jpg", enhanced)
+            cv2.imwrite(f"debug_ocr_{debug_index}_6_thresh.jpg", thresh)
+            cv2.imwrite(f"debug_ocr_{debug_index}_7_morph.jpg", morph)
+            cv2.imwrite(f"debug_ocr_{debug_index}_8_thresh_inv.jpg", thresh_inv)
+            cv2.imwrite(f"debug_ocr_{debug_index}_9_morph_inv.jpg", morph_inv)
         
-        # SISTEMA DE VOTAÇÃO: Tenta OCR em TODAS as versões
+        # SISTEMA DE VOTAÇÃO: Testa TODAS as versões (incluindo as novas)
         versoes = {
             'gray': gray,
+            'bilateral': bilateral,
+            'otsu': otsu,
+            'otsu_inv': otsu_inv,
+            'enhanced': enhanced,
             'thresh': thresh,
             'morph': morph,
             'thresh_inv': thresh_inv,
